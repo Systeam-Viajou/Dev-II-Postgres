@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>ViajouAPI</artifactId>
+    <artifactId>ViajouSpring</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ViajouAPI</name>
-    <description>ViajouAPI</description>
+    <name>ViajouSpring</name>
+    <description>ViajouSpring</description>
     <url/>
     <licenses>
         <license/>
