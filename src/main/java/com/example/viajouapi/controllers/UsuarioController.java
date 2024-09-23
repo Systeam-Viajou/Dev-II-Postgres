@@ -68,6 +68,7 @@ public class UsuarioController {
             usuario.setTelefone(usuarioAtualizado.getTelefone());
             usuario.setGenero(usuarioAtualizado.getGenero());
             usuario.setSenha(usuarioAtualizado.getSenha());
+            usuario.setCpf(usuarioAtualizado.getCpf());
             usuarioService.salvarUsuario(usuario);
             return ResponseEntity.ok("Usuario atualizado com sucesso");
         }
@@ -89,8 +90,8 @@ public class UsuarioController {
         return usuarioService.buscarPorUsername(username);
     }
 
-    @GetMapping("/buscar/email/{username}")
-    public Usuario buscarPorEmail(@PathVariable String username){
-        return usuarioService.buscarPorEmail(username);
+    @GetMapping("/buscar/email/{email}")
+    public Usuario buscarPorEmail(@PathVariable String email){
+        return usuarioService.buscarPorEmail(email);
     }
 }

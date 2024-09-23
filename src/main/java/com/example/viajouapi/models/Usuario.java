@@ -40,6 +40,11 @@ public class Usuario {
     @Pattern(regexp = "F|M|N|O") // Validação para aceitar apenas 'F', 'M' ou 'N'
     private String genero;
 
+    @Column(name = "cpf", nullable = false, length = 11)
+    private String cpf;
+
+
+
     @Column(name = "senha", nullable = false, length = 255)
     private String senha;
 
@@ -66,6 +71,14 @@ public class Usuario {
 
     public String getSobrenome() {
         return sobrenome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public void setSobrenome(String sobrenome) {
