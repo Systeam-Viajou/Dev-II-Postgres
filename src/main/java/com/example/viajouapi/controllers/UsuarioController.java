@@ -83,4 +83,14 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario não encontrado");
         }
     }
+
+    @GetMapping("/buscar/username/{username}")
+    public Usuario buscarPorUsername(@PathVariable String username){
+        return usuarioService.buscarPorUsername(username);
+    }
+
+    @GetMapping("/buscar/email/{username}")
+    public Usuario buscarPorEmail(@PathVariable String username){
+        return usuarioService.buscarPorEmail(username);
+    }
 }

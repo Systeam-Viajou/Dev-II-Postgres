@@ -29,4 +29,12 @@ public class UsuarioService {
         usuarioRepository.delete(usuario);
         return usuario;
     }
+
+    public Usuario buscarPorEmail(String email){
+        return usuarioRepository.findByEmail(email);
+    }
+
+    public Usuario buscarPorUsername(String username){
+        return usuarioRepository.findByUsername(username);
+    }
 }
