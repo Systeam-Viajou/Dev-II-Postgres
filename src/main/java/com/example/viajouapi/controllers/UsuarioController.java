@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/ViajouAPI/usuarios")
+@RequestMapping("/viajouapi/usuarios")
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
