@@ -37,6 +37,7 @@ public class UsuarioController {
     public ResponseEntity<String> inserirUsuario(@Valid @RequestBody Usuario usuario, BindingResult resultado){
         if(resultado.hasErrors()){
             Map<String, String> erros = new HashMap<>();
+
             for (FieldError erro : resultado.getFieldErrors()) {
                 erros.put(erro.getField(), erro.getDefaultMessage());
             }
