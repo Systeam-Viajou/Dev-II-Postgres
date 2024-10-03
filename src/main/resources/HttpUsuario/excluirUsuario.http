@@ -1,0 +1,2 @@
+DELETE http://localhost:8080/viajouapi/usuarios/excluir/3bi93gMWPKOSFnkGEQVFFo8HONR2
+Content-Type: application/json

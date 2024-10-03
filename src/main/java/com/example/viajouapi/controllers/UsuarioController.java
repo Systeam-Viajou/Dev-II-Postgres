@@ -11,6 +11,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -73,6 +74,54 @@ public class UsuarioController {
             return ResponseEntity.ok("Usuario atualizado com sucesso");
         }
     }
+
+    @PatchMapping("/atualizarParcial/{uid}")
+    public ResponseEntity<String> atualizarParcial(
+            @PathVariable String uid,
+            @RequestBody Map<String, Object> atualizacoes) {
+
+        Usuario usuarioExistente = usuarioService.buscarPorUID(uid);
+        if (usuarioExistente == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
+        }
+
+        atualizacoes.forEach((campo, valor) -> {
+            switch (campo) {
+                case "nome":
+                    usuarioExistente.setNome((String) valor);
+                    break;
+                case "sobrenome":
+                    usuarioExistente.setSobrenome((String) valor);
+                    break;
+                case "dataNascimento":
+                    usuarioExistente.setDataNascimento((Date) valor);
+                    break;
+                case "username":
+                    usuarioExistente.setUsername((String) valor);
+                    break;
+                case "email":
+                    usuarioExistente.setEmail((String) valor);
+                    break;
+                case "telefone":
+                    usuarioExistente.setTelefone((String) valor);
+                    break;
+                case "genero":
+                    usuarioExistente.setGenero((String) valor);
+                    break;
+                case "senha":
+                    usuarioExistente.setSenha((String) valor);
+                    break;
+                case "cpf":
+                    usuarioExistente.setCpf((String) valor);
+                    break;
+                // Adicione outros campos conforme necessário
+            }
+        });
+
+        usuarioService.salvarUsuario(usuarioExistente);
+        return ResponseEntity.ok("Usuário atualizado parcialmente com sucesso");
+    }
+
 
     @DeleteMapping("/excluir/{uid}")
     public ResponseEntity<String> excluirUsuario(@PathVariable String uid)  {

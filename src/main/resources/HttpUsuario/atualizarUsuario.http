@@ -1,0 +1,14 @@
+PUT http://localhost:8080/viajouapi/usuarios/atualizar/2324r4234
+Content-Type: application/json
+
+{
+  "uid": "rt43tergiuggggggggggggggggggggggggg",
+  "nome": "çççç",
+  "sobrenome": "çççç",
+  "dataNascimento": "1990-05-20",
+  "username": "çççç",
+  "email": "çççççççççç@sfgdnb.com",
+  "telefone": "11959388525",
+  "genero": "M",
+  "senha": "seaSegura123"
+}
