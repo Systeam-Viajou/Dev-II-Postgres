@@ -34,6 +34,6 @@ jobs:
       uses: johnbeynon/render-deploy-action@v0.0.8
       with:
         # ID of the service to deploy
-        service-id: ${{secrets.iddev}}
+        service-id: ${{secrets.id}}
         # A Render API key
-        api-key: ${{secrets.keydev}}
+        api-key: ${{secrets.key}}
