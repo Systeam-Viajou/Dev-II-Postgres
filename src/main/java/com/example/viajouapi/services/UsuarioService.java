@@ -11,7 +11,9 @@ import java.util.List;
 public class UsuarioService {
     private final UsuarioRepository usuarioRepository;
 
-    public UsuarioService(UsuarioRepository usuarioRepository){this.usuarioRepository = usuarioRepository;}
+    public UsuarioService(UsuarioRepository usuarioRepository){
+        this.usuarioRepository = usuarioRepository;
+    }
 
     public List<Usuario> buscarUsuarios(){
         return usuarioRepository.findAll();
@@ -22,7 +24,9 @@ public class UsuarioService {
     }
 
     @Transactional
-    public Usuario salvarUsuario(Usuario usuario){return usuarioRepository.save(usuario);}
+    public Usuario salvarUsuario(Usuario usuario){
+        return usuarioRepository.save(usuario);
+    }
 
     public Usuario excluirUsuario(String uid){
         Usuario usuario = buscarPorUID(uid);
