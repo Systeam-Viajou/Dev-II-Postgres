@@ -15,31 +15,28 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
+    // Buscando todos os usuarios
     public List<Usuario> buscarUsuarios(){
         return usuarioRepository.findAll();
     }
 
-    public Usuario buscarPorUID(String uid){
-        return usuarioRepository.findByUid(uid);
-    }
-
-    @Transactional
-    public Usuario salvarUsuario(Usuario usuario){
-        return usuarioRepository.save(usuario);
-    }
-
-    public Usuario excluirUsuario(String uid){
-        Usuario usuario = buscarPorUID(uid);
-        usuarioRepository.delete(usuario);
-        return usuario;
-    }
-
-
+    // Buscanco usuario pelo email
     public Usuario buscarPorEmail(String email){
         return usuarioRepository.findByEmail(email);
     }
 
+    // Buscando usuario pelo username
     public Usuario buscarPorUsername(String username){
         return usuarioRepository.findByUsername(username);
+    }
+
+    // Buscando o usuario pelo uid
+    public Usuario buscarPorUID(String uid){
+        return usuarioRepository.findByUid(uid);
+    }
+
+    // Salvando e atualizando o usuario
+    public Usuario salvarUsuario(Usuario usuario){
+        return usuarioRepository.save(usuario);
     }
 }

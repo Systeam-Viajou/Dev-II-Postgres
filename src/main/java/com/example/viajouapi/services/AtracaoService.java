@@ -14,15 +14,23 @@ public class AtracaoService {
         this.atracaoRepository = atracaoRepository;
     }
 
+    // Buscando todas as atrações
     public List<Atracao> buscarAtracoes(){
         return atracaoRepository.findAll();
     }
 
+    // Buscando pelo nome, ele pode estar em qualquer lugar da linha
+    public List<Atracao> buscarAtracaoPorNome(String nome){
+        return atracaoRepository.findByNomeContainsIgnoreCase(nome);
+    }
+
+    // Buscando atração pelo ID
     public Atracao buscarAtracaoPorID(Long id){
         return atracaoRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Atração não encontrada"));
     }
 
+    // Salvando e atualizando atração
     public Atracao salvarAtracao(Atracao atracao) {
         return atracaoRepository.save(atracao);
     }

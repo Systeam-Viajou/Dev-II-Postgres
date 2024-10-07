@@ -26,11 +26,13 @@ public class PontoTuristicoController {
         this.pontoTuristicoService = pontoTuristicoService;
     }
 
+    // Buscando todos os pontos turisticos
     @GetMapping("/buscar")
     public List<PontoTuristico> buscarAtracoes(){
         return pontoTuristicoService.buscarPontoTuristico();
     }
 
+    // Inserindo um ponto turistico
     @PostMapping("/inserir")
     public ResponseEntity<String> inserirPontoTuristico(@Valid @RequestBody PontoTuristico pontoTuristico, BindingResult resultado){
         if(resultado.hasErrors()){
@@ -47,6 +49,7 @@ public class PontoTuristicoController {
         }
     }
 
+    // Atualizando uma parte do ponto turistico
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<String> atualizarParcial(
             @PathVariable Long id,

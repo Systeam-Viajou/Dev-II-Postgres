@@ -15,15 +15,18 @@ public class CategoriaService {
         this.categoriaRepository = categoriaRepository;
     }
 
+    // Buscando todas as categorias
     public List<Categoria> buscarCategoria(){
         return categoriaRepository.findAll();
     }
 
+    // Buscando categoria pelo id
     public Categoria buscarCategoriaPorID(Long id){
         return categoriaRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Categoria não encontrada"));
     }
 
+    // Salvando e atualizando categoria
     public Categoria salvarCategoria(Categoria categoria){
         return categoriaRepository.save(categoria);
     }

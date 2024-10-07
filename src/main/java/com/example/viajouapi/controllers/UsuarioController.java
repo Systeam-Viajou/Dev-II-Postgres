@@ -28,11 +28,23 @@ public class UsuarioController {
         this.validador = validator;
     }
 
+    // Buscanco todos os usuarios
     @GetMapping("/buscar")
     public List<Usuario> buscarUsuarios(){
         return usuarioService.buscarUsuarios();
     }
 
+    @GetMapping("/buscar/username/{username}")
+    public Usuario buscarPorUsername(@PathVariable String username){
+        return usuarioService.buscarPorUsername(username);
+    }
+
+    @GetMapping("/buscar/email/{email}")
+    public Usuario buscarPorEmail(@PathVariable String email){
+        return usuarioService.buscarPorEmail(email);
+    }
+
+    // Inserindo um usuario
     @PostMapping("/inserir")
     public ResponseEntity<String> inserirUsuario(@Valid @RequestBody Usuario usuario, BindingResult resultado){
         if(resultado.hasErrors()){
@@ -49,33 +61,7 @@ public class UsuarioController {
         }
     }
 
-    @PutMapping("/atualizar/{uid}")
-    public ResponseEntity<String> atualizarUsuario( @PathVariable String uid, @Valid @RequestBody Usuario usuarioAtualizado,  BindingResult resultado){
-        if(resultado.hasErrors()){
-            Map<String, String> erros = new HashMap<>();
-            for (FieldError erro : resultado.getFieldErrors()) {
-                erros.put(erro.getField(), erro.getDefaultMessage());
-            }
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros.toString());
-        }
-        else{
-            Usuario usuarioExistence = usuarioService.buscarPorUID(uid);
-            Usuario usuario = usuarioExistence;
-            usuario.setUid(usuarioAtualizado.getUid());
-            usuario.setNome(usuarioAtualizado.getNome());
-            usuario.setSobrenome(usuarioAtualizado.getSobrenome());
-            usuario.setDataNascimento(usuarioAtualizado.getDataNascimento());
-            usuario.setUsername(usuarioAtualizado.getUsername());
-            usuario.setEmail(usuarioAtualizado.getEmail());
-            usuario.setTelefone(usuarioAtualizado.getTelefone());
-            usuario.setGenero(usuarioAtualizado.getGenero());
-            usuario.setSenha(usuarioAtualizado.getSenha());
-            usuario.setCpf(usuarioAtualizado.getCpf());
-            usuarioService.salvarUsuario(usuario);
-            return ResponseEntity.ok("Usuario atualizado com sucesso");
-        }
-    }
-
+    // Atrualizando uma parte do usuario
     @PatchMapping("/atualizarParcial/{uid}")
     public ResponseEntity<String> atualizarParcial(
             @PathVariable String uid,
@@ -123,25 +109,4 @@ public class UsuarioController {
         return ResponseEntity.ok("Usuário atualizado parcialmente com sucesso");
     }
 
-
-    @DeleteMapping("/excluir/{uid}")
-    public ResponseEntity<String> excluirUsuario(@PathVariable String uid)  {
-        if(usuarioService.buscarPorUID(uid) != null) {
-            usuarioService.excluirUsuario(uid);
-            return ResponseEntity.ok("Usuario excluido com sucesso!");
-        }
-        else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuario não encontrado");
-        }
-    }
-
-    @GetMapping("/buscar/username/{username}")
-    public Usuario buscarPorUsername(@PathVariable String username){
-        return usuarioService.buscarPorUsername(username);
-    }
-
-    @GetMapping("/buscar/email/{email}")
-    public Usuario buscarPorEmail(@PathVariable String email){
-        return usuarioService.buscarPorEmail(email);
-    }
 }

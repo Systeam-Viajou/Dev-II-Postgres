@@ -15,15 +15,18 @@ public class PontoTuristicoService {
         this.pontoTuristicoReporitory = pontoTuristicoReporitory;
     }
 
+    // Buscando todos os pontos turisticos
     public List<PontoTuristico> buscarPontoTuristico(){
         return pontoTuristicoReporitory.findAll();
     }
 
+    // Buscando os pontos turistipos pelo id
     public PontoTuristico buscarPontoPorID(Long id){
         return pontoTuristicoReporitory.findById(id).orElseThrow(() ->
                 new RuntimeException("Ponto turídtico não encontrado"));
     }
 
+    // Salvando e atualizando os pontos turisticos
     public PontoTuristico salvarPOntoTuristico(PontoTuristico pontoTuristico){
         return pontoTuristicoReporitory.save(pontoTuristico);
     }

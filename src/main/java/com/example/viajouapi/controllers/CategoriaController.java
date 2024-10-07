@@ -27,11 +27,13 @@ public class CategoriaController {
         this.categoriaService = categoriaService;
     }
 
+    // Buscando todas as categorias
     @GetMapping("/buscar")
     public List<Categoria> buscarCategoria(){
         return categoriaService.buscarCategoria();
     }
 
+    // INserindo uma categoria
     @PostMapping("/inserir")
     public ResponseEntity<String> inserirCategoria(@Valid @RequestBody Categoria categoria, BindingResult resultado){
         if(resultado.hasErrors()){
@@ -48,6 +50,7 @@ public class CategoriaController {
         }
     }
 
+    // Atrualizando uma parte da categoria
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<String> atualizarParcial(
             @PathVariable Long id,

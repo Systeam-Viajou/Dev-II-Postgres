@@ -29,11 +29,19 @@ public class AtracaoController {
         this.atracaoService = atracaoService;
     }
 
+    // Buscando todas as atrações
     @GetMapping("/buscar")
     public List<Atracao> buscarAtracoes(){
         return atracaoService.buscarAtracoes();
     }
 
+    // Buscando a atração pelo nome, ele pode estar em qualquer parte do nome
+    @GetMapping("/buscarPorNome/{nome}")
+    public List<Atracao> buscarPorNome(@PathVariable String nome){
+        return atracaoService.buscarAtracaoPorNome(nome);
+    }
+
+    // Inserindo uma atração
     @PostMapping("/inserir")
     public ResponseEntity<String> inserirAtracao(@Valid @RequestBody Atracao atracao, BindingResult resultado){
         if(resultado.hasErrors()){
@@ -50,6 +58,7 @@ public class AtracaoController {
         }
     }
 
+    // Atrualizando uma parte da atração
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<String> atualizarParcial(
             @PathVariable Long id,
