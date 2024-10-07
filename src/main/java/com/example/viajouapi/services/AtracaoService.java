@@ -18,7 +18,7 @@ public class AtracaoService {
         return atracaoRepository.findAll();
     }
 
-    public Atracao buscarPorID(Long id){
+    public Atracao buscarAtracaoPorID(Long id){
         return atracaoRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Atração não encontrada"));
     }

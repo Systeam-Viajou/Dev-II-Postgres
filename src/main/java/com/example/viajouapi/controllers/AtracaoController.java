@@ -24,11 +24,9 @@ import java.util.Map;
 @RequestMapping("/viajouapi/atracao")
 public class AtracaoController {
     private final AtracaoService atracaoService;
-    private final Validator validador;
 
-    public AtracaoController(AtracaoService atracaoService, Validator validator){
+    public AtracaoController(AtracaoService atracaoService){
         this.atracaoService = atracaoService;
-        this.validador = validator;
     }
 
     @GetMapping("/buscar")
@@ -57,7 +55,7 @@ public class AtracaoController {
             @PathVariable Long id,
             @RequestBody Map<String, Object> atualizacoes) {
 
-        Atracao atracaoExistente = atracaoService.buscarPorID(id);
+        Atracao atracaoExistente = atracaoService.buscarAtracaoPorID(id);
         if (atracaoExistente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Atração não encontrada");
         }

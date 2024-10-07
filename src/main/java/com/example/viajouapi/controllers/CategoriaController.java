@@ -22,11 +22,9 @@ import java.util.Map;
 public class CategoriaController {
 
     private final CategoriaService categoriaService;
-    private final Validator validador;
 
-    public CategoriaController(CategoriaService categoriaService, Validator validator){
+    public CategoriaController(CategoriaService categoriaService){
         this.categoriaService = categoriaService;
-        this.validador = validator;
     }
 
     @GetMapping("/buscar")
@@ -55,7 +53,7 @@ public class CategoriaController {
             @PathVariable Long id,
             @RequestBody Map<String, Object> atualizacoes) {
 
-        Categoria categoriaExistente = categoriaService.buscarPorID(id);
+        Categoria categoriaExistente = categoriaService.buscarCategoriaPorID(id);
         if (categoriaExistente == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Atração não encontrada");
         }

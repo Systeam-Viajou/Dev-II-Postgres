@@ -1,2 +1,0 @@
-POST http://localhost:8080/viajouapi/atracao/inserir
-Content-Type: application/json

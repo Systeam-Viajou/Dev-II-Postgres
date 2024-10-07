@@ -19,7 +19,7 @@ public class CategoriaService {
         return categoriaRepository.findAll();
     }
 
-    public Categoria buscarPorID(Long id){
+    public Categoria buscarCategoriaPorID(Long id){
         return categoriaRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Categoria não encontrada"));
     }
