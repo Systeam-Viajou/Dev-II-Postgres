@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/viajouapi/pontoturistico")
+@RequestMapping("/viajouapi/pontosturisticos")
 public class PontoTuristicoController {
     private final PontoTuristicoService pontoTuristicoService;
 
