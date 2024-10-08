@@ -6,6 +6,7 @@ import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.ZonedDateTime;
 import java.time.LocalDateTime;
 
@@ -18,10 +19,10 @@ public class Evento {
     private Long id;
 
     @Column(name = "data_inicio", columnDefinition = "TIMESTAMP WITH TIME ZONE")
-    private ZonedDateTime dataInicio;
+    private Timestamp dataInicio;
 
     @Column(name = "data_termino", columnDefinition = "TIMESTAMP WITH TIME ZONE")
-    private ZonedDateTime dataTermino;
+    private Timestamp dataTermino;
 
     @DecimalMin(value = "0.00", message = "O preço por pessoa deve ser no mínimo 0.00.")
     @DecimalMax(value = "99999999.99", message = "O preço por pessoa deve ser no máximo 99999999.99.")
@@ -44,19 +45,19 @@ public class Evento {
         this.id = id;
     }
 
-    public ZonedDateTime getDataInicio() {
+    public Timestamp getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(ZonedDateTime dataInicio) {
+    public void setDataInicio(Timestamp dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public ZonedDateTime getDataTermino() {
+    public Timestamp getDataTermino() {
         return dataTermino;
     }
 
-    public void setDataTermino(ZonedDateTime dataTermino) {
+    public void setDataTermino(Timestamp dataTermino) {
         this.dataTermino = dataTermino;
     }
 

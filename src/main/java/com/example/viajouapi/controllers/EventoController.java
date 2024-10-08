@@ -13,6 +13,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.HashMap;
@@ -65,18 +66,19 @@ public class EventoController {
         atualizacoes.forEach((campo, valor) -> {
             switch (campo) {
                 case "dataInicio":
-                    eventoExistente.setDataInicio((ZonedDateTime) valor);
+                    eventoExistente.setDataInicio((Timestamp) valor);
                     break;
                 case "dataTermino":
-                    eventoExistente.setDataTermino((ZonedDateTime) valor);
+                    eventoExistente.setDataTermino((Timestamp) valor);
+                    break;
                 case "precoPessoa":
-                    eventoExistente.setPrecoPessoa((BigDecimal) valor);
+                    eventoExistente.setPrecoPessoa(new BigDecimal((String) valor));
                     break;
                 case "atracao":
                     eventoExistente.setAtracao((Atracao) valor);
                     break;
                 case "dataDesativacao":
-                    eventoExistente.setDataDesativacao((LocalDateTime) valor);
+                    eventoExistente.setDataDesativacao(LocalDateTime.parse((String) valor));
                     break;
             }
         });
@@ -84,4 +86,5 @@ public class EventoController {
         eventoService.salvarEvento(eventoExistente);
         return ResponseEntity.ok("Evento atualizado com sucesso");
     }
+
 }
