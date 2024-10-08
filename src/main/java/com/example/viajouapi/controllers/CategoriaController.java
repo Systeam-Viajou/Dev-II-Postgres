@@ -34,7 +34,13 @@ public class CategoriaController {
         return categoriaService.buscarCategoria();
     }
 
-    // INserindo uma categoria
+    // Buscando a categoria pelo nome, ele pode estar em qualquer parte do nome
+    @GetMapping("/buscarPorNome/{nome}")
+    public List<Categoria> buscarPorNome(@PathVariable String nome){
+        return categoriaService.buscarCategoriaPorNome(nome);
+    }
+
+    // Inserindo uma categoria
     @PostMapping("/inserir")
     public ResponseEntity<String> inserirCategoria(@Valid @RequestBody Categoria categoria, BindingResult resultado){
         if(resultado.hasErrors()){
