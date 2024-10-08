@@ -1,8 +1,10 @@
 package com.example.viajouapi.services;
 
 import com.example.viajouapi.models.Evento;
+import com.example.viajouapi.models.Excursao;
 import com.example.viajouapi.models.PontoTuristico;
 import com.example.viajouapi.repositorys.EventoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,5 +31,12 @@ public class EventoService {
     // Salvando e atualizando os eventos
     public Evento salvarEvento(Evento evento){
         return eventoRepository.save(evento);
+    }
+
+    @Transactional
+    public Evento excluirEvento(Long id){
+        Evento evento = buscarEventoPorID(id);
+        eventoRepository.deleteById(id);;
+        return evento;
     }
 }

@@ -61,6 +61,18 @@ public class EventoController {
         }
     }
 
+    @DeleteMapping("/excluir/{id}")
+    public ResponseEntity<String> excluirEvento(@PathVariable long id) {
+
+        if (eventoService.buscarEventoPorID(id) != null) {
+            eventoService.excluirEvento(id);
+            return ResponseEntity.ok("Evento excluido com sucesso");
+
+        } else {
+            return ResponseEntity.ok("Evento não existe");
+        }
+    }
+
     // Atualizando uma parte do ponto turistico
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<String> atualizarParcial(
