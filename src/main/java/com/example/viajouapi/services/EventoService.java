@@ -13,7 +13,7 @@ import java.util.List;
 public class EventoService {
     private final EventoRepository eventoRepository;
 
-    private EventoService(EventoRepository eventoRepository){
+    public EventoService(EventoRepository eventoRepository){
         this.eventoRepository = eventoRepository;
     }
 

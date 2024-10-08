@@ -10,7 +10,7 @@ import java.util.List;
 public class EmpresaService {
     private final EmpresaRepository empresaRepository;
 
-    private EmpresaService(EmpresaRepository empresaRepository){
+    public EmpresaService(EmpresaRepository empresaRepository){
         this.empresaRepository = empresaRepository;
     }
 

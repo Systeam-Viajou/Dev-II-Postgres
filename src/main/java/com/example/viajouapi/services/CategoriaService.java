@@ -12,7 +12,7 @@ import java.util.List;
 public class CategoriaService {
     private final CategoriaRepository categoriaRepository;
 
-    private CategoriaService(CategoriaRepository categoriaRepository){
+    public CategoriaService(CategoriaRepository categoriaRepository){
         this.categoriaRepository = categoriaRepository;
     }
 

@@ -11,7 +11,7 @@ import java.util.List;
 public class PontoTuristicoService {
     private final PontoTuristicoReporitory pontoTuristicoReporitory;
 
-    private PontoTuristicoService(PontoTuristicoReporitory pontoTuristicoReporitory){
+    public PontoTuristicoService(PontoTuristicoReporitory pontoTuristicoReporitory){
         this.pontoTuristicoReporitory = pontoTuristicoReporitory;
     }
 

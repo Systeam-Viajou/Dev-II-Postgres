@@ -11,7 +11,7 @@ import java.util.List;
 public class ExcursaoService {
     private final ExcursaoRepository excursaoRepository;
 
-    private ExcursaoService(ExcursaoRepository excursaoRepository){
+    public ExcursaoService(ExcursaoRepository excursaoRepository){
         this.excursaoRepository = excursaoRepository;
     }
 
