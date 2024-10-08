@@ -27,7 +27,7 @@ public class PontoTuristicoService {
     }
 
     // Salvando e atualizando os pontos turisticos
-    public PontoTuristico salvarPOntoTuristico(PontoTuristico pontoTuristico){
+    public PontoTuristico salvarPontoTuristico(PontoTuristico pontoTuristico){
         return pontoTuristicoReporitory.save(pontoTuristico);
     }
 }
