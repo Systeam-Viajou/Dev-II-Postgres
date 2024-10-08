@@ -69,7 +69,7 @@ public class EmpresaController {
                 case "siteEmpresa":
                     empresaExistente.setSiteEmpresa((String) valor);
                 case "dataDesativacao":
-                    empresaExistente.setDataDesativacao((LocalDateTime) valor);
+                    empresaExistente.setDataDesativacao(ZonedDateTime.parse((String) valor));
                     break;
             }
         });

@@ -13,6 +13,7 @@ import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,6 +66,9 @@ public class CategoriaController {
             switch (campo) {
                 case "nome":
                     categoriaExistente.setNome((String) valor);
+                    break;
+                case "dataDesativacao":
+                    categoriaExistente.setDataDesativacao(ZonedDateTime.parse((String) valor));
                     break;
             }
         });

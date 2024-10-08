@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +36,7 @@ public class EventoController {
         return eventoService.buscarEvento();
     }
 
-    // Inserindo um ponto turistico
+    // Inserindo um evento
     @PostMapping("/inserir")
     public ResponseEntity<String> inserirEvento(@Valid @RequestBody Evento evento, BindingResult resultado){
         if(resultado.hasErrors()){
@@ -47,6 +48,14 @@ public class EventoController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(erros.toString());
         }
         else{
+            // Converter dataInicio e dataTermino para o fuso horário de Brasília
+            if (evento.getDataInicio() != null) {
+                evento.setDataInicio(evento.getDataInicio().withZoneSameInstant(ZoneId.of("America/Sao_Paulo")));
+            }
+            if (evento.getDataTermino() != null) {
+                evento.setDataTermino(evento.getDataTermino().withZoneSameInstant(ZoneId.of("America/Sao_Paulo")));
+            }
+
             eventoService.salvarEvento(evento);
             return ResponseEntity.ok("Evento inserido com sucesso");
         }
@@ -66,10 +75,12 @@ public class EventoController {
         atualizacoes.forEach((campo, valor) -> {
             switch (campo) {
                 case "dataInicio":
-                    eventoExistente.setDataInicio((Timestamp) valor);
+                    ZonedDateTime zonedDateTimeInicio = ZonedDateTime.parse((String) valor).withZoneSameInstant(ZoneId.of("America/Sao_Paulo"));
+                    eventoExistente.setDataInicio(ZonedDateTime.from(zonedDateTimeInicio.toInstant()));
                     break;
                 case "dataTermino":
-                    eventoExistente.setDataTermino((Timestamp) valor);
+                    ZonedDateTime zonedDateTimeTermino = ZonedDateTime.parse((String) valor).withZoneSameInstant(ZoneId.of("America/Sao_Paulo"));
+                    eventoExistente.setDataTermino(ZonedDateTime.from(zonedDateTimeTermino.toInstant()));
                     break;
                 case "precoPessoa":
                     eventoExistente.setPrecoPessoa(new BigDecimal((String) valor));
@@ -78,7 +89,7 @@ public class EventoController {
                     eventoExistente.setAtracao((Atracao) valor);
                     break;
                 case "dataDesativacao":
-                    eventoExistente.setDataDesativacao(LocalDateTime.parse((String) valor));
+                    eventoExistente.setDataDesativacao(ZonedDateTime.parse((String) valor));
                     break;
             }
         });

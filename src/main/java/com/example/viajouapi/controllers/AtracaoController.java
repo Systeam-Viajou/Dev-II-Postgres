@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -90,7 +91,7 @@ public class AtracaoController {
                     atracaoExistente.setCategoria((Categoria) valor);
                     break;
                 case "dataDesativacao":
-                    atracaoExistente.setDataDesativacao((LocalDateTime) valor);
+                    atracaoExistente.setDataDesativacao(ZonedDateTime.parse((String) valor));
                     break;
             }
         });

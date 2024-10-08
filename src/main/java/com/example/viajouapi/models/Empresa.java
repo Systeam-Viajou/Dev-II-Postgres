@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "empresa")
@@ -22,7 +23,7 @@ public class Empresa {
     private String siteEmpresa;
 
     @Column(name = "data_desativacao")
-    private LocalDateTime dataDesativacao;
+    private ZonedDateTime dataDesativacao;
 
     public Long getId() {
         return id;
@@ -48,11 +49,11 @@ public class Empresa {
         this.siteEmpresa = siteEmpresa;
     }
 
-    public LocalDateTime getDataDesativacao() {
+    public ZonedDateTime getDataDesativacao() {
         return dataDesativacao;
     }
 
-    public void setDataDesativacao(LocalDateTime dataDesativacao) {
+    public void setDataDesativacao(ZonedDateTime dataDesativacao) {
         this.dataDesativacao = dataDesativacao;
     }
 }

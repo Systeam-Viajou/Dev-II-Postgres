@@ -1,14 +1,11 @@
 package com.example.viajouapi.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
-
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.time.ZonedDateTime;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "evento")
@@ -18,11 +15,11 @@ public class Evento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "data_inicio", columnDefinition = "TIMESTAMP WITH TIME ZONE")
-    private Timestamp dataInicio;
+    @Column(name = "data_inicio")
+    private ZonedDateTime dataInicio;
 
-    @Column(name = "data_termino", columnDefinition = "TIMESTAMP WITH TIME ZONE")
-    private Timestamp dataTermino;
+    @Column(name = "data_termino")
+    private ZonedDateTime dataTermino;
 
     @DecimalMin(value = "0.00", message = "O preço por pessoa deve ser no mínimo 0.00.")
     @DecimalMax(value = "99999999.99", message = "O preço por pessoa deve ser no máximo 99999999.99.")
@@ -35,7 +32,9 @@ public class Evento {
     private Atracao atracao;
 
     @Column(name = "data_desativacao")
-    private LocalDateTime dataDesativacao;
+    private ZonedDateTime dataDesativacao;
+
+    // Getters e Setters
 
     public Long getId() {
         return id;
@@ -45,19 +44,19 @@ public class Evento {
         this.id = id;
     }
 
-    public Timestamp getDataInicio() {
+    public ZonedDateTime getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(Timestamp dataInicio) {
+    public void setDataInicio(ZonedDateTime dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public Timestamp getDataTermino() {
+    public ZonedDateTime getDataTermino() {
         return dataTermino;
     }
 
-    public void setDataTermino(Timestamp dataTermino) {
+    public void setDataTermino(ZonedDateTime dataTermino) {
         this.dataTermino = dataTermino;
     }
 
@@ -77,12 +76,11 @@ public class Evento {
         this.atracao = atracao;
     }
 
-    public LocalDateTime getDataDesativacao() {
+    public ZonedDateTime getDataDesativacao() {
         return dataDesativacao;
     }
 
-    public void setDataDesativacao(LocalDateTime dataDesativacao) {
+    public void setDataDesativacao(ZonedDateTime dataDesativacao) {
         this.dataDesativacao = dataDesativacao;
     }
 }
-

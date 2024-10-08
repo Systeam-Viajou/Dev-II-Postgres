@@ -3,6 +3,7 @@ package com.example.viajouapi.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "categoria")
@@ -17,7 +18,7 @@ public class Categoria {
     private String nome;
 
     @Column(name = "data_desativacao")
-    private LocalDateTime dataDesativacao;
+    private ZonedDateTime dataDesativacao;
 
     // Getters e Setters
 
@@ -37,11 +38,11 @@ public class Categoria {
         this.nome = nome;
     }
 
-    public LocalDateTime getDataDesativacao() {
+    public ZonedDateTime getDataDesativacao() {
         return dataDesativacao;
     }
 
-    public void setDataDesativacao(LocalDateTime dataDesativacao) {
+    public void setDataDesativacao(ZonedDateTime dataDesativacao) {
         this.dataDesativacao = dataDesativacao;
     }
 }
