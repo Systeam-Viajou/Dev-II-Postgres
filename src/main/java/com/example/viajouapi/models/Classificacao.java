@@ -1,5 +1,4 @@
 package com.example.viajouapi.models;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.DecimalMin;
@@ -19,9 +18,8 @@ public class Classificacao {
     private Float nota;
 
     @NotNull(message = "O ID do usuário é obrigatório.")
-    @ManyToOne
-    @JoinColumn(name = "ID_usuario", referencedColumnName = "id", nullable = false)
-    private Usuario uidUsuario;
+    @Column(name = "ID_usuario", nullable = false, length = 255)
+    private String idUsuario;
 
     @NotNull(message = "A atração é obrigatória.")
     @ManyToOne
@@ -44,12 +42,12 @@ public class Classificacao {
         this.nota = nota;
     }
 
-    public Usuario getUidUsuario() {
-        return uidUsuario;
+    public String getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setUidUsuario(Usuario uidUsuario) {
-        this.uidUsuario = uidUsuario;
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public Atracao getAtracao() {
