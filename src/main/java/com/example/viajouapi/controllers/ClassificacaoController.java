@@ -3,6 +3,7 @@ package com.example.viajouapi.controllers;
 import com.example.viajouapi.models.Atracao;
 import com.example.viajouapi.models.Classificacao;
 import com.example.viajouapi.models.Evento;
+import com.example.viajouapi.models.Usuario;
 import com.example.viajouapi.services.ClassificacaoService;
 import com.example.viajouapi.services.EventoService;
 import jakarta.validation.Valid;
@@ -68,7 +69,7 @@ public class ClassificacaoController {
                     classificacaoExistente.setNota((Float) valor);
                     break;
                 case "idUsuario":
-                    classificacaoExistente.setIdUsuario((String) valor);
+                    classificacaoExistente.setIdUsuario((Usuario) valor);
                     break;
                 case "atracao":
                     classificacaoExistente.setAtracao((Atracao) valor);
