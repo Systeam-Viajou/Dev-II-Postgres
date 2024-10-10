@@ -33,10 +33,4 @@ public class ClassificacaoService {
         return classificacaoRpository.save(classificacao);
     }
 
-    @Transactional
-    public Classificacao excluirClassificacao(Long id){
-        Classificacao classificacao = buscarClassificacaoPorID(id);
-        classificacaoRpository.deleteById(id);;
-        return classificacao;
-    }
 }

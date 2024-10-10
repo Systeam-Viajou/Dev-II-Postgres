@@ -19,7 +19,9 @@ public class Classificacao {
 
     @NotNull(message = "O ID do usuário é obrigatório.")
     @Column(name = "ID_usuario", nullable = false, length = 255)
-    private String idUsuario;
+    @ManyToOne
+    @JoinColumn(name = "ID_usuario", referencedColumnName = "uid", nullable = false)
+    private Usuario idUsuario;
 
     @NotNull(message = "A atração é obrigatória.")
     @ManyToOne
@@ -42,11 +44,11 @@ public class Classificacao {
         this.nota = nota;
     }
 
-    public String getIdUsuario() {
+    public Usuario getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(String idUsuario) {
+    public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
     }
 
