@@ -18,7 +18,6 @@ public class Classificacao {
     private Float nota;
 
     @NotNull(message = "O ID do usuário é obrigatório.")
-    @Column(name = "ID_usuario", nullable = false, length = 255)
     @ManyToOne
     @JoinColumn(name = "ID_usuario", referencedColumnName = "uid", nullable = false)
     private Usuario idUsuario;
