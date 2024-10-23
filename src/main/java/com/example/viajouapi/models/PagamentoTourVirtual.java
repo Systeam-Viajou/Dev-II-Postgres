@@ -11,11 +11,13 @@ public class PagamentoTourVirtual {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "ID_usuario", nullable = false)
-    private String idUsuario;
+    @ManyToOne
+    @JoinColumn(name = "ID_usuario", referencedColumnName = "uid", nullable = false)
+    private Usuario idUsuario;
 
-    @Column(name = "ID_tourvirtual", nullable = false)
-    private int idTourVirtual;
+    @ManyToOne
+    @JoinColumn(name = "ID_tourvirtual", referencedColumnName = "id", nullable = false)
+    private PontoTuristico idTourVirtual;
 
     @Column(name = "data_pagamento")
     @Temporal(TemporalType.DATE)
@@ -30,19 +32,19 @@ public class PagamentoTourVirtual {
         this.id = id;
     }
 
-    public String getIdUsuario() {
+    public Usuario getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(String idUsuario) {
+    public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
     }
 
-    public int getIdTourVirtual() {
+    public PontoTuristico getIdTourVirtual() {
         return idTourVirtual;
     }
 
-    public void setIdTourVirtual(int idTourVirtual) {
+    public void setIdTourVirtual(PontoTuristico idTourVirtual) {
         this.idTourVirtual = idTourVirtual;
     }
 

@@ -1,6 +1,7 @@
 package com.example.viajouapi.services;
 
 import com.example.viajouapi.models.PagamentoTourVirtual;
+import com.example.viajouapi.models.PlanoUsuario;
 import com.example.viajouapi.repositorys.PagamentoTourVirtualRepository;
 import org.springframework.stereotype.Service;
 
@@ -31,12 +32,7 @@ public class PagamentoTourVirtualService {
     }
 
     // Buscando pagamentos pelo ID do usuário
-    public List<PagamentoTourVirtual> buscarPagamentosPorUsuario(String idUsuario) {
-        return pagamentoTourVirtualRepository.findByIdUsuario(idUsuario);
-    }
-
-    // Buscando pagamentos pelo ID do tour virtual
-    public List<PagamentoTourVirtual> buscarPagamentosPorTourVirtual(int idTourVirtual) {
-        return pagamentoTourVirtualRepository.findByIdTourVirtual(idTourVirtual);
+    public List<PlanoUsuario> buscarPagamentosPorUsuario(String uid) {
+        return pagamentoTourVirtualRepository.findByUsuarioUid(uid);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.viajouapi.repositorys;
 
 import com.example.viajouapi.models.PagamentoTourVirtual;
+import com.example.viajouapi.models.PlanoUsuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,9 +9,9 @@ import java.util.List;
 
 @Repository
 public interface PagamentoTourVirtualRepository extends JpaRepository<PagamentoTourVirtual, Long> {
-    // Método para buscar pagamentos por ID do usuário
-    List<PagamentoTourVirtual> findByIdUsuario(String idUsuario);
+    // Buscar planos de um usuário específico
+    List<PlanoUsuario> findByUsuarioUid(String uid);
 
-    // Método para buscar pagamentos por ID do tour virtual
-    List<PagamentoTourVirtual> findByIdTourVirtual(int idTourVirtual);
+    //Busclar pelo Tour;
+    List<PlanoUsuario> findByIdTourVirtual(Long id);
 }
