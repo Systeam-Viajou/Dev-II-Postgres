@@ -2,6 +2,7 @@ package com.example.viajouapi.services;
 
 import com.example.viajouapi.models.Plano;
 import com.example.viajouapi.repositorys.PlanoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class PlanoService {
     // Buscando plano pelo id
     public Plano buscarPlanoPorID(Long id) {
         return planoRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Plano não encontrado com ID: " + id));
+                new EntityNotFoundException("Plano não encontrado"));
     }
 
     // Salvando e atualizando plano

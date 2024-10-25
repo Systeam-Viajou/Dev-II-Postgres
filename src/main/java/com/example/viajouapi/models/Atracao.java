@@ -40,11 +40,23 @@ public class Atracao {
     @JoinColumn(name = "ID_categoria", referencedColumnName = "id")
     private Categoria categoria;
 
+    @ManyToOne
+    @JoinColumn(name = "ID_tipo", referencedColumnName = "id")
+    private Tipo tipo;
+
+
+
     @Column(name = "data_desativacao")
     private ZonedDateTime dataDesativacao;
 
     // Getters e Setters
+    public Tipo getTipo() {
+        return tipo;
+    }
 
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
     public Long getId() {
         return id;
     }

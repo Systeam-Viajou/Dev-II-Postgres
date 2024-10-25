@@ -2,6 +2,7 @@ package com.example.viajouapi.services;
 
 import com.example.viajouapi.models.PesquisaPerfil;
 import com.example.viajouapi.repositorys.PesquisaPerfilRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,8 +27,9 @@ public class PesquisaPerfilService {
     }
 
     // Buscar pesquisas por UID do usuário
-    public List<PesquisaPerfil> buscarPesquisasPorUidUsuario(String uidUsuario) {
-        return pesquisaPerfilRepository.findByUsuarioUid(uidUsuario);
+    public PesquisaPerfil buscarPesquisasPorUidUsuario(String uid) {
+        return pesquisaPerfilRepository.findByUsuario_Uid(uid).orElseThrow(() ->
+                new EntityNotFoundException("Pesquisa perfil não encontrada"));
     }
 
     // Salvar ou atualizar uma pesquisa

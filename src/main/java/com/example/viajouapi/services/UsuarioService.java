@@ -2,6 +2,8 @@ package com.example.viajouapi.services;
 
 import com.example.viajouapi.models.Usuario;
 import com.example.viajouapi.repositorys.UsuarioRepository;
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -15,27 +17,25 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    // Buscando todos os usuarios
     public List<Usuario> buscarUsuarios(){
         return usuarioRepository.findAll();
     }
 
-    // Buscanco usuario pelo email
     public Usuario buscarPorEmail(String email){
-        return usuarioRepository.findByEmail(email);
+        return usuarioRepository.findByEmail(email).
+                orElseThrow(() -> new EntityNotFoundException("O e-mail não existe"));
     }
 
-    // Buscando usuario pelo username
     public Usuario buscarPorUsername(String username){
-        return usuarioRepository.findByUsername(username);
-    }
+        return usuarioRepository.findByUsername(username).
+                orElseThrow(() -> new EntityNotFoundException("O username não existe"));
 
-    // Buscando o usuario pelo uid
+    }
     public Usuario buscarPorUID(String uid){
-        return usuarioRepository.findByUid(uid);
+        return usuarioRepository.findByUid(uid).
+                orElseThrow(() -> new EntityNotFoundException("O UID não existe"));
     }
 
-    // Salvando e atualizando o usuario
     public Usuario salvarUsuario(Usuario usuario){
         return usuarioRepository.save(usuario);
     }

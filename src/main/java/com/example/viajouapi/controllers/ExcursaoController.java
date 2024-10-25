@@ -6,6 +6,9 @@ import com.example.viajouapi.models.Evento;
 import com.example.viajouapi.models.Excursao;
 import com.example.viajouapi.services.EventoService;
 import com.example.viajouapi.services.ExcursaoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,12 +33,23 @@ public class ExcursaoController {
     }
 
     // Buscando todos os eventos
+    @Operation(summary = "Buscar todas as Excursões", description = "Retorna uma lista de todas as Excursões")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Excursões recuperadas com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
     @GetMapping("/buscar")
     public List<Excursao> buscarExcursao(){
         return excursaoService.buscarExcursao();
     }
 
     // Inserindo um evento
+    @Operation(summary = "Inserir uma nova Excursão", description = "Insere uma nova Excursão no sistema")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Excursão inserido com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor"),
+            @ApiResponse(responseCode = "400", description = "Algum parametro está incorreto!")
+    })
     @PostMapping("/inserir")
     public ResponseEntity<String> inserirEvento(@Valid @RequestBody Excursao excursao, BindingResult resultado){
         if(resultado.hasErrors()){
@@ -63,7 +77,26 @@ public class ExcursaoController {
         }
     }
 
+
+    @Operation(summary = "Buscar Excursão por id", description = "Busca uma Excursão pelo id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Exercursão recuperada com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor"),
+            @ApiResponse(responseCode = "404", description = "Exercursão não encontrado")
+    })
+    @GetMapping("/buscarPorId/{id}")
+    public Excursao buscarPorId(Long id){
+        return excursaoService.buscarExcursaoPorID(id);
+    }
+
     // Atualizando uma parte do ponto turistico
+    @Operation(summary = "Atualizar parcialmente uma Excursão", description = "Atualiza parcialmente as informações de uma Excursão pelo id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Excursão atualizada com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor"),
+            @ApiResponse(responseCode = "400", description = "Algum parametro está incorreto!"),
+            @ApiResponse(responseCode = "404", description = "Excursão não encontrada")
+    })
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<String> atualizarParcial(
             @PathVariable Long id,

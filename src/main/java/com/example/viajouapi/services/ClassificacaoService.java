@@ -2,6 +2,8 @@ package com.example.viajouapi.services;
 
 import com.example.viajouapi.models.Classificacao;
 import com.example.viajouapi.repositorys.ClassificacaoRepository;
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -23,13 +25,20 @@ public class ClassificacaoService {
     // Buscando os eventos pelo id
     public Classificacao buscarClassificacaoPorID(Long id){
         return classificacaoRpository.findById(id).orElseThrow(() ->
-                new RuntimeException("Classificação não encontrado"));
+                new EntityNotFoundException("Classificação não encontrado"));
+    }
+
+    public Classificacao buscarClassificacaoPorUsuario(String uid){
+        return classificacaoRpository.findByUsuario_Uid(uid).orElseThrow(() ->
+                new EntityNotFoundException("Classificação não encontrada"));
     }
 
     // Salvando e atualizando os eventos
     @Transactional
     public Classificacao salvarClassificacao(Classificacao classificacao){
+
         return classificacaoRpository.save(classificacao);
     }
+
 
 }

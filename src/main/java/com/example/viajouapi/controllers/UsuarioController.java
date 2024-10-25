@@ -1,8 +1,10 @@
 package com.example.viajouapi.controllers;
 
 import com.example.viajouapi.models.Usuario;
-import com.example.viajouapi.repositorys.UsuarioRepository;
 import com.example.viajouapi.services.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,22 +31,45 @@ public class UsuarioController {
     }
 
     // Buscanco todos os usuarios
+    @Operation(summary = "Buscar todos os usuários", description = "Retorna uma lista de todos os usuários cadastrados")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuarios recuperados com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
     @GetMapping("/buscar")
     public List<Usuario> buscarUsuarios(){
         return usuarioService.buscarUsuarios();
     }
 
+    @Operation(summary = "Buscar usuário por username", description = "Busca um usuário pelo username")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuario recuperado com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor"),
+            @ApiResponse(responseCode = "404", description = "Usuario não encontrado")
+    })
     @GetMapping("/buscar/username/{username}")
     public Usuario buscarPorUsername(@PathVariable String username){
         return usuarioService.buscarPorUsername(username);
     }
 
+    @Operation(summary = "Buscar usuário por email", description = "Busca um usuário pelo email")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuario recuperado com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor"),
+            @ApiResponse(responseCode = "404", description = "Usuario não encontrado")
+    })
     @GetMapping("/buscar/email/{email}")
     public Usuario buscarPorEmail(@PathVariable String email){
         return usuarioService.buscarPorEmail(email);
     }
 
     // Inserindo um usuario
+    @Operation(summary = "Inserir um novo usuário", description = "Insere um novo usuário no sistema")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuario inserido com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor"),
+            @ApiResponse(responseCode = "400", description = "Algum parametro está incorreto!")
+    })
     @PostMapping("/inserir")
     public ResponseEntity<String> inserirUsuario(@Valid @RequestBody Usuario usuario, BindingResult resultado){
         if(resultado.hasErrors()){
@@ -62,6 +87,13 @@ public class UsuarioController {
     }
 
     // Atrualizando uma parte do usuario
+    @Operation(summary = "Atualizar parcialmente um usuário", description = "Atualiza parcialmente as informações de um usuário pelo UID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuario atualizado com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor"),
+            @ApiResponse(responseCode = "400", description = "Algum parametro está incorreto!"),
+            @ApiResponse(responseCode = "404", description = "Usuario não encontrado")
+    })
     @PatchMapping("/atualizarParcial/{uid}")
     public ResponseEntity<String> atualizarParcial(
             @PathVariable String uid,

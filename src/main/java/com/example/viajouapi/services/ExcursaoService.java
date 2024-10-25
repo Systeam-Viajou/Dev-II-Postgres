@@ -3,6 +3,7 @@ package com.example.viajouapi.services;
 import com.example.viajouapi.models.Evento;
 import com.example.viajouapi.models.Excursao;
 import com.example.viajouapi.repositorys.ExcursaoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class ExcursaoService {
     // Buscando os eventos pelo id
     public Excursao buscarExcursaoPorID(Long id){
         return excursaoRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Excursao não encontrado"));
+                new EntityNotFoundException("Excursao não encontrado"));
     }
 
     // Salvando e atualizando os eventos

@@ -2,6 +2,9 @@ package com.example.viajouapi.controllers;
 
 import com.example.viajouapi.models.PlanoUsuario;
 import com.example.viajouapi.services.PlanoUsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,25 +26,42 @@ public class PlanoUsuarioController {
         this.planoUsuarioService = planoUsuarioService;
     }
 
-    // Buscando todos os planos de usuários
+    @Operation(summary = "Buscar todos os planos de usuários", description = "Retorna uma lista de todos os planos de usuários cadastrados")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Planos de usuários recuperados com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
     @GetMapping("/buscar")
     public List<PlanoUsuario> buscarPlanosUsuarios() {
         return planoUsuarioService.buscarTodos();
     }
 
-    // Buscando planos por UID do usuário
+    @Operation(summary = "Buscar planos de usuário por UID", description = "Retorna uma lista de planos associados a um usuário específico pelo UID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Planos do usuário recuperados com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+    })
     @GetMapping("/buscar-por-usuario/{uid}")
     public List<PlanoUsuario> buscarPorUsuario(@PathVariable String uid) {
         return planoUsuarioService.buscarPorUsuarioUid(uid);
     }
 
-    // Buscando planos ativos (com data de término posterior à data atual)
+    @Operation(summary = "Buscar planos ativos de usuários", description = "Retorna planos de usuários que estão ativos, com data de término posterior à data atual")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Planos ativos recuperados com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
     @GetMapping("/ativos")
     public List<PlanoUsuario> buscarPlanosAtivos() {
         return planoUsuarioService.buscarPlanosAtivos();
     }
 
-    // Inserindo um plano de usuário
+    @Operation(summary = "Inserir um novo plano de usuário", description = "Insere um novo plano de usuário no sistema")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Plano de usuário inserido com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Parâmetros inválidos"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
     @PostMapping("/inserir")
     public ResponseEntity<String> inserirPlanoUsuario(@Valid @RequestBody PlanoUsuario planoUsuario, BindingResult resultado) {
         if (resultado.hasErrors()) {
@@ -56,7 +76,12 @@ public class PlanoUsuarioController {
         }
     }
 
-    // Atualizando parcialmente um plano de usuário
+    @Operation(summary = "Atualizar parcialmente um plano de usuário", description = "Atualiza parcialmente as informações de um plano de usuário pelo ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Plano de usuário atualizado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Plano de usuário não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<String> atualizarParcial(
             @PathVariable Long id,
@@ -70,10 +95,10 @@ public class PlanoUsuarioController {
         atualizacoes.forEach((campo, valor) -> {
             switch (campo) {
                 case "dataPagamento":
-                    planoUsuarioExistente.setDataPagamento((LocalDateTime) valor);
+                    planoUsuarioExistente.setDataPagamento(LocalDateTime.parse((String) valor));
                     break;
                 case "dataTermino":
-                    planoUsuarioExistente.setDataTermino((LocalDateTime) valor);
+                    planoUsuarioExistente.setDataTermino(LocalDateTime.parse((String) valor));
                     break;
             }
         });
@@ -82,7 +107,12 @@ public class PlanoUsuarioController {
         return ResponseEntity.ok("Plano de usuário atualizado com sucesso");
     }
 
-    // Excluir um plano de usuário
+    @Operation(summary = "Excluir um plano de usuário", description = "Exclui um plano de usuário pelo ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Plano de usuário excluído com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Plano de usuário não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
     @DeleteMapping("/excluir/{id}")
     public ResponseEntity<String> excluirPlanoUsuario(@PathVariable Long id) {
         planoUsuarioService.excluirPlanoUsuario(id);

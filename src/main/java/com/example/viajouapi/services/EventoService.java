@@ -4,6 +4,7 @@ import com.example.viajouapi.models.Evento;
 import com.example.viajouapi.models.Excursao;
 import com.example.viajouapi.models.PontoTuristico;
 import com.example.viajouapi.repositorys.EventoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class EventoService {
     // Buscando os eventos pelo id
     public Evento buscarEventoPorID(Long id){
         return eventoRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Evento não encontrado"));
+                new EntityNotFoundException("Evento não encontrado"));
     }
 
     // Salvando e atualizando os eventos
@@ -33,10 +34,8 @@ public class EventoService {
         return eventoRepository.save(evento);
     }
 
-    @Transactional
-    public Evento excluirEvento(Long id){
-        Evento evento = buscarEventoPorID(id);
-        eventoRepository.deleteById(id);;
-        return evento;
+    public Evento buscarPorAtracao(Long id){
+        return eventoRepository.findByAtracao_Id(id).orElseThrow(() ->
+                new EntityNotFoundException("Evento não encontrado"));
     }
 }

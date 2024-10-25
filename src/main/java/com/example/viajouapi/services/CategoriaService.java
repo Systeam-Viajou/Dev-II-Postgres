@@ -4,6 +4,8 @@ import com.example.viajouapi.models.Atracao;
 import com.example.viajouapi.models.Categoria;
 import com.example.viajouapi.models.Usuario;
 import com.example.viajouapi.repositorys.CategoriaRepository;
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,13 +25,14 @@ public class CategoriaService {
 
     // Buscando pelo nome, ele pode estar em qualquer lugar da linha
     public List<Categoria> buscarCategoriaPorNome(String nome){
-        return categoriaRepository.findByNomeContainsIgnoreCase(nome);
+        return categoriaRepository.findByNomeContainsIgnoreCase(nome).orElseThrow(() ->
+                new EntityNotFoundException("Nenhuma categoria encontrada"));
     }
 
     // Buscando categoria pelo id
     public Categoria buscarCategoriaPorID(Long id){
         return categoriaRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Categoria não encontrada"));
+                new EntityExistsException("Categoria não encontrada"));
     }
 
     // Salvando e atualizando categoria

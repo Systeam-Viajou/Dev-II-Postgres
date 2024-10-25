@@ -2,6 +2,9 @@ package com.example.viajouapi.controllers;
 
 import com.example.viajouapi.models.Plano;
 import com.example.viajouapi.services.PlanoService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,18 +27,26 @@ public class PlanoController {
         this.planoService = planoService;
     }
 
-    // Buscando todos os planos
+    @Operation(summary = "Buscar todos os planos", description = "Retorna uma lista de todos os planos cadastrados")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Planos recuperados com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
     @GetMapping("/buscar")
     public List<Plano> buscarPlanos() {
         return planoService.buscarPlanos();
     }
 
-    // Inserindo um plano
+    @Operation(summary = "Inserir um novo plano", description = "Insere um novo plano no sistema")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Plano inserido com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Parâmetros inválidos"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
     @PostMapping("/inserir")
     public ResponseEntity<String> inserirPlano(@Valid @RequestBody Plano plano, BindingResult resultado) {
         if (resultado.hasErrors()) {
             Map<String, String> erros = new HashMap<>();
-
             for (FieldError erro : resultado.getFieldErrors()) {
                 erros.put(erro.getField(), erro.getDefaultMessage());
             }
@@ -47,7 +57,12 @@ public class PlanoController {
         }
     }
 
-    // Atualizando uma parte do plano
+    @Operation(summary = "Atualizar parcialmente um plano", description = "Atualiza parcialmente as informações de um plano pelo ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Plano atualizado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Plano não encontrado"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<String> atualizarParcial(
             @PathVariable Long id,
@@ -70,13 +85,13 @@ public class PlanoController {
                     planoExistente.setLivrePropaganda((Boolean) valor);
                     break;
                 case "valor":
-                    planoExistente.setValor((BigDecimal) valor);
+                    planoExistente.setValor(new BigDecimal(valor.toString()));
                     break;
                 case "duracao":
                     planoExistente.setDuracao((String) valor);
                     break;
                 case "dataDesativacao":
-                    planoExistente.setDataDesativacao((LocalDateTime) valor);
+                    planoExistente.setDataDesativacao(LocalDateTime.parse((String) valor));
                     break;
             }
         });

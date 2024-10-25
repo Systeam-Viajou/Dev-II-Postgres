@@ -4,6 +4,9 @@ import com.example.viajouapi.models.Atracao;
 import com.example.viajouapi.models.Categoria;
 
 import com.example.viajouapi.services.CategoriaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,18 +32,36 @@ public class CategoriaController {
     }
 
     // Buscando todas as categorias
+    // Buscando a categoria pelo nome, ele pode estar em qualquer parte do nome
+
+    @Operation(summary = "Buscar Todas as categorias", description = "Busca todas as categorias")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "categorias retornadas com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
     @GetMapping("/buscar")
     public List<Categoria> buscarCategoria(){
         return categoriaService.buscarCategoria();
     }
 
-    // Buscando a categoria pelo nome, ele pode estar em qualquer parte do nome
+    @Operation(summary = "Buscar categorias por nome", description = "Busca todas as categorias com este nome")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "categorias retornadas com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor"),
+            @ApiResponse(responseCode = "404", description = "Categoria não Encontrada!")
+    })
     @GetMapping("/buscarPorNome/{nome}")
     public List<Categoria> buscarPorNome(@PathVariable String nome){
         return categoriaService.buscarCategoriaPorNome(nome);
     }
 
     // Inserindo uma categoria
+    @Operation(summary = "Inserir uma categoria", description = "Insere uma categoria")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Categoria inserida com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor"),
+            @ApiResponse(responseCode = "400", description = "Algum parametro está incorreto!")
+    })
     @PostMapping("/inserir")
     public ResponseEntity<String> inserirCategoria(@Valid @RequestBody Categoria categoria, BindingResult resultado){
         if(resultado.hasErrors()){
@@ -58,6 +79,13 @@ public class CategoriaController {
     }
 
     // Atrualizando uma parte da categoria
+    @Operation(summary = "Atualizar parcialmente uma categoria", description = "Atualiza parcialmente as informações de uma categoria")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Categoria atualizada com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor"),
+            @ApiResponse(responseCode = "400", description = "Algum parametro está incorreto!"),
+            @ApiResponse(responseCode = "404", description = "Categoria não encontrada")
+    })
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<String> atualizarParcial(
             @PathVariable Long id,

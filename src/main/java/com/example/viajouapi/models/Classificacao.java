@@ -20,7 +20,7 @@ public class Classificacao {
     @NotNull(message = "O ID do usuário é obrigatório.")
     @ManyToOne
     @JoinColumn(name = "ID_usuario", referencedColumnName = "uid", nullable = false)
-    private Usuario idUsuario;
+    private Usuario usuario;
 
     @NotNull(message = "A atração é obrigatória.")
     @ManyToOne
@@ -43,12 +43,12 @@ public class Classificacao {
         this.nota = nota;
     }
 
-    public Usuario getIdUsuario() {
-        return idUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setIdUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Atracao getAtracao() {
@@ -58,4 +58,6 @@ public class Classificacao {
     public void setAtracao(Atracao atracao) {
         this.atracao = atracao;
     }
+
+
 }
