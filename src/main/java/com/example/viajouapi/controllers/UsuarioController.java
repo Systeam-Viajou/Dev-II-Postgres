@@ -141,4 +141,38 @@ public class UsuarioController {
         return ResponseEntity.ok("Usuário atualizado parcialmente com sucesso");
     }
 
+    // Endpoint para atualizar o nickname do usuário
+    @Operation(summary = "Atualizar o username", description = "Atualiza o username de um usuário pelo UID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Username atualizado com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor"),
+            @ApiResponse(responseCode = "400", description = "Algum parametro está incorreto!"),
+            @ApiResponse(responseCode = "404", description = "Usuario não encontrado")
+    })
+    @PutMapping("/{id}/atualizar-nome")
+    public void atualizarNome(
+            @PathVariable("id") String uidUsuario,
+            @RequestParam String nickname) {
+
+        usuarioService.atualizarNome(uidUsuario, nickname);
+    }
+
+    // Endpoint para cadastrar um novo usuário
+    @Operation(summary = "Inserir um novo usuário (procedures)", description = "Insere um novo usuário no sistema")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Usuario inserido com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor"),
+            @ApiResponse(responseCode = "400", description = "Algum parametro está incorreto!")
+    })
+    @PostMapping("/cadastro")
+    public void cadastroUsuario(
+            @RequestParam String uidUsuario, @RequestParam String nickname,
+            @RequestParam String nome, @RequestParam String sobrenome,
+            @RequestParam String cpf, @RequestParam String email,
+            @RequestParam String dataNascimento, @RequestParam String telefone,
+            @RequestParam Character genero, @RequestParam String senha) {
+
+        usuarioService.cadastroUsuario(uidUsuario, nickname, nome, sobrenome, cpf, email, dataNascimento, telefone, genero, senha);
+    }
+
 }

@@ -40,5 +40,10 @@ public class ClassificacaoService {
         return classificacaoRpository.save(classificacao);
     }
 
+    @Transactional
+    public void avaliarAtracao(Float nota, String uidUsuario, Integer idAtracao) {
+        classificacaoRpository.avaliarAtracao(nota, uidUsuario, idAtracao);
+    }
+
 
 }

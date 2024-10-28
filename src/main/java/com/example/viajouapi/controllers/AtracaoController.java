@@ -85,8 +85,7 @@ public class AtracaoController {
             @ApiResponse(responseCode = "200", description = "Atração atualizada com sucesso"),
             @ApiResponse(responseCode = "500", description = "Erro interno no servidor"),
             @ApiResponse(responseCode = "400", description = "Algum parâmetro está incorreto!"),
-            @ApiResponse(responseCode = "404", description = "Atração não encontrada")
-    })
+            @ApiResponse(responseCode = "404", description = "Atração não encontrada")})
     @PatchMapping("/atualizarParcial/{id}")
     public ResponseEntity<String> atualizarParcial(
             @PathVariable Long id,

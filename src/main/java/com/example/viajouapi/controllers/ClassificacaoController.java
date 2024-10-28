@@ -123,4 +123,21 @@ public class ClassificacaoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Classificação não encontrada");
         }
     }
+
+    @Operation(summary = "Inserir uma classificação (Pocedure)", description = "Insere uma nova classificação")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Classificação inserida com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor"),
+            @ApiResponse(responseCode = "400", description = "Algum parâmetro está incorreto!")
+    })
+    @PostMapping("/avaliar-Atracao/{uid}/{nota}/{atracao}")
+    public void avaliarAtracao(
+            @PathVariable("uid") String uidUsuario,
+            @PathVariable("nota") Float nota,
+            @PathVariable("atracao") Integer idAtracao) {
+
+        classificacaoService.avaliarAtracao(nota, uidUsuario, idAtracao);
+    }
+
+
 }

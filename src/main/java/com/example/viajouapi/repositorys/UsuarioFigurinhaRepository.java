@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface UsuarioFigurinhaRepository extends JpaRepository<UsuarioFigurinha, Long> {
     // Método para buscar figurinha pelo ID do usuário
     Optional<List<UsuarioFigurinha>> findByIdUsuario_Uid(String uid);
+
 }

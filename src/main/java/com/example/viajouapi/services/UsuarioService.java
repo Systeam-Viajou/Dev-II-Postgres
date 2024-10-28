@@ -39,4 +39,18 @@ public class UsuarioService {
     public Usuario salvarUsuario(Usuario usuario){
         return usuarioRepository.save(usuario);
     }
+
+    @Transactional
+    public void atualizarNome(String uidUsuario, String nickname) {
+        usuarioRepository.atualizarNome(uidUsuario, nickname);
+    }
+
+    @Transactional
+    public void cadastroUsuario(
+            String uidUsuario, String nickname, String nome, String sobrenome,
+            String cpf, String email, String dataNascimento, String telefone,
+            Character genero, String senha) {
+
+        usuarioRepository.cadastroUsuario(uidUsuario, nickname, nome, sobrenome, cpf, email, dataNascimento, telefone, genero, senha);
+    }
 }
