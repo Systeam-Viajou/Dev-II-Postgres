@@ -75,7 +75,7 @@
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
-            <scope>3.0.1</scope>
+            <scope>3.0.2</scope>
         </dependency>
 
         <dependency>
