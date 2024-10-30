@@ -120,7 +120,12 @@ public class AtracaoController {
                     atracaoExistente.setDataDesativacao(ZonedDateTime.parse((String) valor));
                     break;
                 case "tipo":
-                    atracaoExistente.setTipo((Tipo) valor);
+                    // Conversão manual para o objeto Tipo
+                    Map<String, Object> tipoData = (Map<String, Object>) valor;
+                    Long tipoId = ((Number) tipoData.get("id")).longValue();
+                    Tipo tipo = new Tipo();
+                    tipo.setId(tipoId);
+                    atracaoExistente.setTipo(tipo);
                     break;
             }
         });
