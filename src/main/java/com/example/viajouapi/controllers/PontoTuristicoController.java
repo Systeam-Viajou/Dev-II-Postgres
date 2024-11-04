@@ -6,6 +6,8 @@ import com.example.viajouapi.models.PontoTuristico;
 import com.example.viajouapi.repositorys.PontoTuristicoReporitory;
 import com.example.viajouapi.services.PontoTuristicoService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
@@ -40,6 +42,23 @@ public class PontoTuristicoController {
     @GetMapping("/buscar")
     public List<PontoTuristico> buscarPontoTuristico(){
         return pontoTuristicoService.buscarPontoTuristico();
+    }
+
+    @Operation(summary = "Gerar 15 pontos turisticos aleatórios")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Pontos aleatórios gerados com sucesso",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Atracao.class)) }),
+            @ApiResponse(responseCode = "500", description = "Erro no servidor")
+    })
+    @GetMapping("/aleatorios")
+    public ResponseEntity<?> gerarPontoTuristicoAleatorias() {
+        try {
+            List<PontoTuristico> pontosAleatorios = pontoTuristicoService.gerarPontosTurisicos();
+            return ResponseEntity.ok(pontosAleatorios);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro: " + e.getMessage());
+        }
     }
 
     // Inserindo um ponto turistico

@@ -5,6 +5,8 @@ import com.example.viajouapi.models.Categoria;
 import com.example.viajouapi.models.Tipo;
 import com.example.viajouapi.services.AtracaoService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
@@ -56,6 +58,24 @@ public class AtracaoController {
         }
         return ResponseEntity.ok(atracao);
     }
+
+    @Operation(summary = "Gerar 15 atrações aleatórias")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Atrações aleatórias geradas com sucesso",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Atracao.class)) }),
+            @ApiResponse(responseCode = "500", description = "Erro no servidor")
+    })
+    @GetMapping("/aleatorias")
+    public ResponseEntity<?> gerarNotificacoesAleatorias() {
+        try {
+            List<Atracao> atracoesAleatorias = atracaoService.gerarAtracoesAleatorias();
+            return ResponseEntity.ok(atracoesAleatorias);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro: " + e.getMessage());
+        }
+    }
+
 
     // Inserindo uma atração
     @Operation(summary = "Inserir uma atração", description = "Insere uma nova atração")
