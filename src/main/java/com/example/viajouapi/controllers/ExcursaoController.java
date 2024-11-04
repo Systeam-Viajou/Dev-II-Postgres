@@ -43,6 +43,18 @@ public class ExcursaoController {
         return excursaoService.buscarExcursao();
     }
 
+    @Operation(summary = "Buscar excursões paginados", description = "Retorna uma lista de excursões com paginação")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Excursões recuperados com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
+    @GetMapping("/buscar/paginado")
+    public List<Excursao> buscarExcursaoPaginado(
+            @RequestParam(defaultValue = "0") int offset,
+            @RequestParam(defaultValue = "10") int limit) {
+        return excursaoService.buscarExcursaoPaginacao(offset, limit);
+    }
+
     // Inserindo um evento
     @Operation(summary = "Inserir uma nova Excursão", description = "Insere uma nova Excursão no sistema")
     @ApiResponses(value = {
