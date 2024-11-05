@@ -139,5 +139,15 @@ public class ClassificacaoController {
         classificacaoService.avaliarAtracao(nota, uidUsuario, idAtracao);
     }
 
+    @Operation(summary = "Buscar classificação por atracao", description = "Busca uma classificação específica pelo ID da atracao")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Classificação retornada com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Classificação não encontrada!")
+    })
+    @GetMapping("/buscarPorAtracao/{id}")
+    public List<Classificacao> buscarPorIdAtracao(@PathVariable Long id){
+        return classificacaoService.buscarPorIdAtracao(id);
+    }
+
 
 }

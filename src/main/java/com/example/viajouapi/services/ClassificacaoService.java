@@ -28,6 +28,11 @@ public class ClassificacaoService {
                 new EntityNotFoundException("Classificação não encontrado"));
     }
 
+    public List<Classificacao> buscarPorIdAtracao(Long id){
+        return classificacaoRpository.findByAtracao_Id(id).orElseThrow(() ->
+                new EntityNotFoundException("Classificações não encontradas"));
+    }
+
     public Classificacao buscarClassificacaoPorUsuario(String uid){
         return classificacaoRpository.findByUsuario_Uid(uid).orElseThrow(() ->
                 new EntityNotFoundException("Classificação não encontrada"));

@@ -75,8 +75,9 @@
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
-            <scope>3.0.2</scope>
+            <version>3.0.2</version> <!-- Verifique a versão que funciona melhor para o seu projeto -->
         </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
