@@ -50,6 +50,18 @@ public class EventoController {
         return eventoService.buscarPorAtracao(id);
     }
 
+    @Operation(summary = "Buscar eventos paginados", description = "Retorna uma lista de eventos com paginação")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Eventos recuperados com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
+    @GetMapping("/buscar/paginado")
+    public List<Evento> buscarEventoPaginado(
+            @RequestParam(defaultValue = "0") int offset,
+            @RequestParam(defaultValue = "10") int limit) {
+        return eventoService.buscarEventoPaginacao(offset, limit);
+    }
+
     @Operation(summary = "Inserir um novo evento", description = "Insere um novo evento no sistema")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Evento inserido com sucesso"),

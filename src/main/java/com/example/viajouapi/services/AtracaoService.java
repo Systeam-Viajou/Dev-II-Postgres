@@ -5,7 +5,9 @@ import com.example.viajouapi.repositorys.AtracaoRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class AtracaoService {
@@ -25,6 +27,23 @@ public class AtracaoService {
         return atracaoRepository.findById(id).orElseThrow(() ->
                 new EntityNotFoundException("Atração não encontrada"));
     }
+
+    // Gerando uma lista de 15 notificações aleatórias
+    public List<Atracao> gerarAtracoesAleatorias() {
+        List<Atracao> todasAtracoes = buscarAtracoes();
+        if (todasAtracoes.isEmpty()) {
+            throw new RuntimeException("Nenhuma atração encontrada");
+        }
+
+        Random random = new Random();
+        List<Atracao> atracoesAleatorias = new ArrayList<>();
+        for (int i = 0; i < 15; i++) {
+            Atracao atracaoAleatoria = todasAtracoes.get(random.nextInt(todasAtracoes.size()));
+            atracoesAleatorias.add(atracaoAleatoria);
+        }
+        return atracoesAleatorias;
+    }
+
 
     // Salvando e atualizando atração
     public Atracao salvarAtracao(Atracao atracao) {
