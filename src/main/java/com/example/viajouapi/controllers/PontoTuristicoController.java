@@ -52,7 +52,7 @@ public class PontoTuristicoController {
             @ApiResponse(responseCode = "500", description = "Erro no servidor")
     })
     @GetMapping("/aleatorios")
-    public ResponseEntity<?> gerarPontoTuristicoAleatorias() {
+    public ResponseEntity<?> gerarPontoTuristicoAleatorios() {
         try {
             List<PontoTuristico> pontosAleatorios = pontoTuristicoService.gerarPontosTurisicos();
             return ResponseEntity.ok(pontosAleatorios);

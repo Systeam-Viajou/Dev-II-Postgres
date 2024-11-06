@@ -67,7 +67,7 @@ public class AtracaoController {
             @ApiResponse(responseCode = "500", description = "Erro no servidor")
     })
     @GetMapping("/aleatorias")
-    public ResponseEntity<?> gerarNotificacoesAleatorias() {
+    public ResponseEntity<?> gerarAtracoesAleatorias() {
         try {
             List<Atracao> atracoesAleatorias = atracaoService.gerarAtracoesAleatorias();
             return ResponseEntity.ok(atracoesAleatorias);
