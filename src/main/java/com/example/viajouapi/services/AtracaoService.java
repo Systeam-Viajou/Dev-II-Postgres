@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 public class AtracaoService {
@@ -30,17 +31,29 @@ public class AtracaoService {
 
     // Gerando uma lista de 15 notificações aleatórias
     public List<Atracao> gerarAtracoesAleatorias() {
+        // Busca todas as atrações
         List<Atracao> todasAtracoes = buscarAtracoes();
-        if (todasAtracoes.isEmpty()) {
-            throw new RuntimeException("Nenhuma atração encontrada");
+
+        // Filtra apenas as atrações com tipo "evento", "tour-virtual" ou "ponto-turistico"
+        List<Atracao> atracoesFiltradas = todasAtracoes.stream()
+                .filter(atracao -> "evento".equalsIgnoreCase(atracao.getTipo().getNome())
+                        || "tour-virtual".equalsIgnoreCase(atracao.getTipo().getNome())
+                        || "ponto-turistico".equalsIgnoreCase(atracao.getTipo().getNome()))
+                .collect(Collectors.toList());
+
+        // Verifica se há atrações suficientes
+        if (atracoesFiltradas.size() < 15) {
+            throw new RuntimeException("Atrações insuficientes para seleção aleatória.");
         }
 
+        // Seleciona 15 atrações aleatórias
         Random random = new Random();
         List<Atracao> atracoesAleatorias = new ArrayList<>();
         for (int i = 0; i < 15; i++) {
-            Atracao atracaoAleatoria = todasAtracoes.get(random.nextInt(todasAtracoes.size()));
+            Atracao atracaoAleatoria = atracoesFiltradas.get(random.nextInt(atracoesFiltradas.size()));
             atracoesAleatorias.add(atracaoAleatoria);
         }
+
         return atracoesAleatorias;
     }
 
