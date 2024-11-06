@@ -34,11 +34,12 @@ public class AtracaoService {
         // Busca todas as atrações
         List<Atracao> todasAtracoes = buscarAtracoes();
 
-        // Filtra apenas as atrações com tipo "evento", "tour-virtual" ou "ponto-turistico"
+        // Filtra apenas as atrações com tipo não nulo e com nome "evento", "tour-virtual" ou "ponto-turistico"
         List<Atracao> atracoesFiltradas = todasAtracoes.stream()
-                .filter(atracao -> "evento".equalsIgnoreCase(atracao.getTipo().getNome())
-                        || "tour-virtual".equalsIgnoreCase(atracao.getTipo().getNome())
-                        || "ponto-turistico".equalsIgnoreCase(atracao.getTipo().getNome()))
+                .filter(atracao -> atracao.getTipo() != null &&
+                        ("evento".equalsIgnoreCase(atracao.getTipo().getNome())
+                                || "tour-virtual".equalsIgnoreCase(atracao.getTipo().getNome())
+                                || "ponto-turistico".equalsIgnoreCase(atracao.getTipo().getNome())))
                 .collect(Collectors.toList());
 
         // Verifica se há atrações suficientes
@@ -56,6 +57,7 @@ public class AtracaoService {
 
         return atracoesAleatorias;
     }
+
 
 
     // Salvando e atualizando atração
