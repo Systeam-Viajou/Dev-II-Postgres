@@ -2,23 +2,18 @@ package com.example.viajouapi.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 
 @Entity
-@Table(name = "categoria")
-public class Categoria {
+@Table(name = "tipo")
+public class Tipo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O nome da categoria e obrigatório.")
+    @NotBlank(message = "O nome do tipo é obrigatório.")
     @Column(name = "nome", nullable = false, length = 100)
     private String nome;
-
-    @Column(name = "data_desativacao")
-    private ZonedDateTime dataDesativacao;
 
     // Getters e Setters
 
@@ -36,13 +31,5 @@ public class Categoria {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public ZonedDateTime getDataDesativacao() {
-        return dataDesativacao;
-    }
-
-    public void setDataDesativacao(ZonedDateTime dataDesativacao) {
-        this.dataDesativacao = dataDesativacao;
     }
 }

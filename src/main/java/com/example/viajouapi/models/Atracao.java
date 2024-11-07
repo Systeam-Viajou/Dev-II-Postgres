@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "atracao")
@@ -39,11 +40,23 @@ public class Atracao {
     @JoinColumn(name = "ID_categoria", referencedColumnName = "id")
     private Categoria categoria;
 
+    @ManyToOne
+    @JoinColumn(name = "ID_tipo", referencedColumnName = "id")
+    private Tipo tipo;
+
+
+
     @Column(name = "data_desativacao")
-    private LocalDateTime dataDesativacao;
+    private ZonedDateTime dataDesativacao;
 
     // Getters e Setters
+    public Tipo getTipo() {
+        return tipo;
+    }
 
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
     public Long getId() {
         return id;
     }
@@ -100,11 +113,11 @@ public class Atracao {
         this.categoria = categoria;
     }
 
-    public LocalDateTime getDataDesativacao() {
+    public ZonedDateTime getDataDesativacao() {
         return dataDesativacao;
     }
 
-    public void setDataDesativacao(LocalDateTime dataDesativacao) {
+    public void setDataDesativacao(ZonedDateTime dataDesativacao) {
         this.dataDesativacao = dataDesativacao;
     }
 }

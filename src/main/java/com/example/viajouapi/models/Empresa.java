@@ -1,26 +1,29 @@
 package com.example.viajouapi.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 @Entity
-@Table(name = "categoria")
-public class Categoria {
+@Table(name = "empresa")
+public class Empresa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O nome da categoria e obrigatório.")
-    @Column(name = "nome", nullable = false, length = 100)
+    @Size(max = 255, message = "O nome não pode exceder 255 caracteres.")
+    @Column(name = "nome", length = 255)
     private String nome;
+
+    @Size(max = 255, message = "O site da empresa não pode exceder 255 caracteres.")
+    @Column(name = "site_empresa", length = 255)
+    private String siteEmpresa;
 
     @Column(name = "data_desativacao")
     private ZonedDateTime dataDesativacao;
-
-    // Getters e Setters
 
     public Long getId() {
         return id;
@@ -38,6 +41,14 @@ public class Categoria {
         this.nome = nome;
     }
 
+    public String getSiteEmpresa() {
+        return siteEmpresa;
+    }
+
+    public void setSiteEmpresa(String siteEmpresa) {
+        this.siteEmpresa = siteEmpresa;
+    }
+
     public ZonedDateTime getDataDesativacao() {
         return dataDesativacao;
     }
@@ -46,3 +57,4 @@ public class Categoria {
         this.dataDesativacao = dataDesativacao;
     }
 }
+

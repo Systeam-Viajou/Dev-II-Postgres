@@ -1,26 +1,26 @@
 package com.example.viajouapi.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 @Entity
-@Table(name = "categoria")
-public class Categoria {
+@Table(name = "ponto_turistico")
+public class PontoTuristico {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O nome da categoria e obrigatório.")
-    @Column(name = "nome", nullable = false, length = 100)
-    private String nome;
+    @NotNull(message = "A atração é obrigatória.")
+    @ManyToOne
+    @JoinColumn(name = "ID_atracao", referencedColumnName = "id", nullable = false)
+    private Atracao atracao;
 
     @Column(name = "data_desativacao")
     private ZonedDateTime dataDesativacao;
-
-    // Getters e Setters
 
     public Long getId() {
         return id;
@@ -30,12 +30,12 @@ public class Categoria {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public Atracao getAtracao() {
+        return atracao;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setAtracao(Atracao atracao) {
+        this.atracao = atracao;
     }
 
     public ZonedDateTime getDataDesativacao() {
@@ -46,3 +46,4 @@ public class Categoria {
         this.dataDesativacao = dataDesativacao;
     }
 }
+

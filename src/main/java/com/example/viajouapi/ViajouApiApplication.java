@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ViajouApiApplication {
 
     public static void main(String[] args) {
+
         SpringApplication.run(ViajouApiApplication.class, args);
     }
-
 }
