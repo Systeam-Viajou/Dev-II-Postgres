@@ -54,7 +54,7 @@ public class PontoTuristicoController {
     @GetMapping("/aleatorios")
     public ResponseEntity<?> gerarPontoTuristicoAleatorios() {
         try {
-            List<PontoTuristico> pontosAleatorios = pontoTuristicoService.gerarPontosTurisicos();
+            List<PontoTuristico> pontosAleatorios = pontoTuristicoService.gerarPontosTuristicos();
             return ResponseEntity.ok(pontosAleatorios);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro: " + e.getMessage());

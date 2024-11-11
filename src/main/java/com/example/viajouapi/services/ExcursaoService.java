@@ -20,7 +20,7 @@ public class ExcursaoService {
 
     // Buscando todos os eventos
     public List<Excursao> buscarExcursao(){
-        return excursaoRepository.findAll();
+        return excursaoRepository.mostrarExcursoesRecentes();
     }
 
     // Buscando excursoes com paginação

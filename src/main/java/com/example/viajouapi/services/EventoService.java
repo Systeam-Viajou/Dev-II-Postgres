@@ -23,7 +23,7 @@ public class EventoService {
 
     // Buscando todos os eventos
     public List<Evento> buscarEvento(){
-        return eventoRepository.findAll();
+        return eventoRepository.mostrarEventosRecentes();
     }
 
     // Buscando eventos com paginação

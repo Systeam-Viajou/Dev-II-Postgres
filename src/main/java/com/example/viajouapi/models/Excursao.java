@@ -16,6 +16,7 @@ public class Excursao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
     @Size(max = 10, message = "A capacidade não pode exceder 10 caracteres.")
