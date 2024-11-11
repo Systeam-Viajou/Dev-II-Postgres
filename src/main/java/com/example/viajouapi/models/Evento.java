@@ -34,6 +34,10 @@ public class    Evento {
     @Column(name = "data_desativacao")
     private ZonedDateTime dataDesativacao;
 
+    @NotNull(message = "A url é obrigatória.")
+    @Column(name = "url")
+    private String url;
+
     // Getters e Setters
 
     public Long getId() {
@@ -82,5 +86,13 @@ public class    Evento {
 
     public void setDataDesativacao(ZonedDateTime dataDesativacao) {
         this.dataDesativacao = dataDesativacao;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

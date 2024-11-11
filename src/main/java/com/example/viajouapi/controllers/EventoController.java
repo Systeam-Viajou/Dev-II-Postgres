@@ -125,6 +125,9 @@ public class EventoController {
                 case "dataDesativacao":
                     eventoExistente.setDataDesativacao(ZonedDateTime.parse((String) valor));
                     break;
+                case "url":
+                    eventoExistente.setUrl((String) valor);
+                    break;
             }
         });
 
